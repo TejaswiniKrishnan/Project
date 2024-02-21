@@ -29,4 +29,19 @@ public class HomeService {
         return homeRepo.findById(id).orElse(null);
     }
 
+    public Home update(int id, Home home) {
+        Home existingHome = homeRepo.findById(id).orElse(null);
+        if (existingHome != null && home != null) {
+            existingHome.setId(home.getId());
+            existingHome.setName(home.getName());
+            existingHome.setPassword(home.getPassword());
+            return homeRepo.save(existingHome);
+        }
+        return null;
+    }
+
+    public boolean delete(int id) {
+        homeRepo.deleteById(id);
+        return true;
+    }
 }
